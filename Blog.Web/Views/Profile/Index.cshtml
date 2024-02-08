@@ -1,0 +1,56 @@
+﻿@model UserDto
+
+@{
+    ViewData["Title"] = "Profil";
+}
+
+
+
+<div class="container mt-5 col-lg-7 col-10">
+    <div class="p-2">
+        <div class="card-body">
+            <div class="">
+                <div class="text-center mb-5">
+                    @if (@Model.Image != null)
+                    {
+                        <img class="img-fluid rounded-circle mb-3" src="data:image/jpeg;base64,@Convert.ToBase64String(@Model.Image?.Data)" alt="Resim" style="width: 150px; height:150px; object-fit:cover">
+                    }
+                    else
+                    {
+                        <img class="img-fluid rounded-circle mb-3" src="/img/profile.png" style="width: 150px; height:150px; object-fit:cover" />
+                    }
+                    <h5 class="card-title">@Model.FirstName @Model.LastName</h5>
+                    <p class="card-text">@Model.Role</p>
+
+                    @if (User.Identity.Name == Model.UserName)
+                    {
+                        <a asp-area="" asp-controller="Profile" asp-action="Edit" class="login text-decoration-none px-2 py-2 ">
+                            <i class="fa-solid fa-user-pen"></i>
+                            <span class="">Düzenle</span>
+                        </a>
+                    }
+
+                </div>
+                <div class="my-3 container col-lg-6 col-10">
+                    <div class="d-flex justify-content-between gap-3">
+                        <div class="">
+                            <h6 class="text-muted">Kullanıcı Adı</h6>
+                            <p>@Model.UserName</p>
+                        </div>
+                        <div class="">
+                            <h6 class="text-muted">E-posta</h6>
+                            <p>@Model.Email</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="text-center">
+                        <h6 class="text-muted">Rol</h6>
+                        <p>@Model.Role</p>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

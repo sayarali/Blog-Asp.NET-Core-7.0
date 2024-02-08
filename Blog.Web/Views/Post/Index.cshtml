@@ -1,0 +1,48 @@
+﻿@model SmallPostDto
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+<div class="container w-75 mt-5">
+    @if (@Model.Image.Data != null)
+    {
+        <img class="mx-auto" src="data:image/jpeg;base64,@Convert.ToBase64String(@Model.Image?.Data)" alt="Resim" style="width: 100%; height: auto; object-fit: cover">
+
+    }
+    <h3 class="mt-5">@Model.Title</h3>
+    <div mt-4>
+        <hr />
+        <div class="d-flex justify-content-between align-items-center">
+            <a asp-controller="Profile" asp-action="Index" asp-route-username="@Model.User.UserName" class="text-decoration-none text-secondary">
+                <div class="d-flex gap-2 align-items-center">
+                    <img id="profile-img" class="img-fluid rounded-circle"
+                         src="@(Model.User.Image?.Data != null ? $"data:image/jpeg;base64,{Convert.ToBase64String(@Model.User.Image.Data)}" : "/img/profile.png")"
+                         alt="Resim" style="width: 35px; height: 35px; object-fit: cover">
+                    <div>
+                        <div style="font-size: 0.8rem">@Model.User.FirstName @Model.User.LastName</div>
+                        <div style="font-size: 0.8rem">@Model.CreatedTime.ToString("dd.MM.yyyy")</div>
+                    </div>
+                </div>
+            </a>
+
+            <div>
+                <span style="font-size: 0.7rem; opacity: 0.8">@Model.ViewCount Görüntüleme</span>
+            </div>
+        </div>
+        <hr />
+    </div>
+
+    <p class="mt-5">
+        @Html.Raw(Model.Content)
+    </p>
+    <hr />
+    <div class="py-2">
+        <span>Kategori: </span>
+        <a asp-controller="Category" asp-action="Index" asp-route-id="@Model.Category.Id">
+            @Model.Category.Name
+        </a>
+    </div>
+    <hr />
+    @await Component.InvokeAsync("Comments", Model.Id)
+    @await Component.InvokeAsync("AddComment", Model.Id)
+</div>

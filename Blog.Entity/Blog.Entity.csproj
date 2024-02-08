@@ -6,4 +6,31 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Entities\" />
+    <None Remove="DTOs\" />
+    <None Remove="DTOs\Posts\" />
+    <None Remove="DTOs\Auth\" />
+    <None Remove="DTOs\Categories\" />
+    <None Remove="DTOs\User\" />
+    <None Remove="DTOs\Images\" />
+    <None Remove="DTOs\About\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="DTOs\" />
+    <Folder Include="DTOs\Posts\" />
+    <Folder Include="DTOs\Auth\" />
+    <Folder Include="DTOs\Categories\" />
+    <Folder Include="DTOs\User\" />
+    <Folder Include="DTOs\Images\" />
+    <Folder Include="DTOs\About\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Blog.Core\Blog.Core.csproj" />
+  </ItemGroup>
 </Project>

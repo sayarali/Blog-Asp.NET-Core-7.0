@@ -1,0 +1,103 @@
+﻿@model List<UserDto>
+
+@{
+    ViewData["Title"] = "Kullanıcılar";
+}
+
+<div class="d-flex justify-content-between">
+
+    <a asp-area="Admin" asp-controller="User" asp-action="Add" class="btn btn-sm btn-success d-flex align-items-center" role="button">
+        <i class="fa-solid fa-user-plus"></i>
+        <span class="ms-2">Kullanıcı Ekle</span>
+    </a>
+</div>
+<div class="card w-100 p-3 rounded-5 mt-4 table-responsive">
+    <table class="w-100 post-table">
+        <thead>
+            <tr>
+                <th class="py-3" scope="col"></th>
+                <th class="py-3" scope="col">Kullanıcı Adı</th>
+                <th class="py-3" scope="col">Adı Soyadı</th>
+                <th class="py-3" scope="col">E-posta</th>
+                <th class="py-3" scope="col">Telefon</th>
+                <th class="py-3" scope="col">Rol</th>
+                <th class="py-3" scope="col">İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr class="post-row border-top">
+                    <th class="py-3" scope="row">
+                        @if (@Model[i].Image != null)
+                        {
+                            <img class="mx-auto center border border-secondary rounded-circle profile-picture" src="data:image/jpeg;base64,@Convert.ToBase64String(@Model[i].Image?.Data)" alt="Resim" style="width: 40px; height: 40px; object-fit:cover;">
+                        }
+                        else
+                        {
+                            <img class="profile-picture" src="/img/profile.png" style="width: 40px; height: 40px; object-fit:cover" />
+                        }
+
+                    </th>
+
+                    <td class="py-3">
+                        @Model[i].UserName
+                    </td>
+                    <td class="py-3">
+                        @Model[i].FirstName @Model[i].LastName
+                    </td>
+                    <td class="py-3">
+                        @Model[i].Email
+                    </td>
+                    <td class="py-3">
+                        @Model[i].PhoneNumber
+                    </td>
+                    <td class="py-3">
+                        <span class="badge text-bg-info rounded-pill"> @Model[i].Role</span>
+                    </td>
+                    <td class="py-3">
+                        <div class="d-flex gap-2">
+                            <a class="btn btn-primary btn-sm"
+                               data-id="@Model[i].Id"
+                               asp-area="Admin" asp-controller="User" asp-action="Update" asp-route-userId="@Model[i].Id">
+                                <i class="fa-solid fa-user-pen"></i>
+                            </a>
+                            <a class="btn btn-danger btn-sm"
+                               data-bs-toggle="modal"
+                               data-bs-target="#confirmDeleteModal-@Model[i].Id">
+                                <i class="fa-solid fa-user-xmark"></i>
+                            </a>
+                        </div>
+
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="confirmDeleteModal-@Model[i].Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5">Kullanıcıyı Sil</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Kullanıcıyı silmek istediğinizden emin misiniz?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a class="btn btn-primary btn-sm"
+                                           data-bs-dismiss="modal">
+                                            <i class="fa-solid fa-xmark"></i> İptal
+                                        </a>
+                                        <a class="btn btn-danger btn-sm"
+                                           data-id="@Model[i].Id"
+                                           asp-area="Admin" asp-controller="User" asp-action="Delete" asp-route-userId="@Model[i].Id">
+                                            <i class='bx bxs-eraser'></i> Evet
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

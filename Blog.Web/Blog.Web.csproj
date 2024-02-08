@@ -8,4 +8,99 @@
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+  <ItemGroup>
+    <ProjectReference Include="..\Blog.Entity\Blog.Entity.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\Blog.Service\Blog.Service.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\Blog.Core\Blog.Core.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\Blog.DataAccess\Blog.DataAccess.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.14" />
+    <PackageReference Include="DevExtreme.Web" Version="23.1.7" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.57" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Areas\" />
+    <None Remove="Areas\Admin\" />
+    <None Remove="Areas\Admin\Controllers\" />
+    <None Remove="Areas\Admin\Views\" />
+    <None Remove="Areas\Admin\Views\Shared\" />
+    <None Remove="Areas\Admin\Views\Home\" />
+    <None Remove="Areas\Admin\Views\Post\" />
+    <None Remove="Areas\Admin\Views\Category\" />
+    <None Remove="Areas\Admin\Views\Comment\" />
+    <None Remove="Areas\Admin\Views\User\" />
+    <None Remove="Views\Auth\" />
+    <None Remove="Views\Profile\" />
+    <None Remove="ViewComponents\" />
+    <None Remove="Views\Shared\Components\" />
+    <None Remove="Views\Shared\Components\NavbarCategories\" />
+    <None Remove="Views\Category\" />
+    <None Remove="Views\Post\" />
+    <None Remove="Views\Shared\Components\SideCategories\" />
+    <None Remove="Views\Shared\Components\MostViewed\" />
+    <None Remove="Views\Shared\Components\Comments\" />
+    <None Remove="Views\Shared\Components\AddComment\" />
+    <None Remove="Filters\" />
+    <None Remove="Filters\PostFilters\" />
+    <None Remove="Areas\Admin\Views\Contact\" />
+    <None Remove="Views\Search\" />
+    <None Remove="Areas\Admin\Views\About\" />
+    <None Remove="Areas\Admin\ViewComponents\" />
+    <None Remove="Areas\Admin\Views\Shared\Components\" />
+    <None Remove="Areas\Admin\Views\Shared\Components\LastMyPosts\" />
+    <None Remove="Areas\Admin\Views\Shared\Components\MostViewedThisMonth\" />
+    <None Remove="Areas\Admin\Views\Shared\Components\MostViewedMy\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\" />
+    <Folder Include="Areas\Admin\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Views\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Admin\Views\Home\" />
+    <Folder Include="wwwroot\logo\" />
+    <Folder Include="Areas\Admin\Views\Post\" />
+    <Folder Include="Areas\Admin\Views\Category\" />
+    <Folder Include="Areas\Admin\Views\Comment\" />
+    <Folder Include="Areas\Admin\Views\User\" />
+    <Folder Include="wwwroot\img\" />
+    <Folder Include="Views\Auth\" />
+    <Folder Include="Views\Profile\" />
+    <Folder Include="ViewComponents\" />
+    <Folder Include="Views\Shared\Components\" />
+    <Folder Include="Views\Shared\Components\NavbarCategories\" />
+    <Folder Include="Views\Category\" />
+    <Folder Include="Views\Post\" />
+    <Folder Include="Views\Shared\Components\SideCategories\" />
+    <Folder Include="Views\Shared\Components\MostViewed\" />
+    <Folder Include="Views\Shared\Components\Comments\" />
+    <Folder Include="Views\Shared\Components\AddComment\" />
+    <Folder Include="Filters\" />
+    <Folder Include="Filters\PostFilters\" />
+    <Folder Include="Areas\Admin\Views\Contact\" />
+    <Folder Include="Views\Search\" />
+    <Folder Include="Areas\Admin\Views\About\" />
+    <Folder Include="Areas\Admin\ViewComponents\" />
+    <Folder Include="Areas\Admin\Views\Shared\Components\" />
+    <Folder Include="Areas\Admin\Views\Shared\Components\LastMyPosts\" />
+    <Folder Include="Areas\Admin\Views\Shared\Components\MostViewedThisMonth\" />
+    <Folder Include="Areas\Admin\Views\Shared\Components\MostViewedMy\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\logo\" />
+    <Content Remove="wwwroot\img\" />
+  </ItemGroup>
 </Project>

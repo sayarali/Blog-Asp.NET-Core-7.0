@@ -1,0 +1,118 @@
+﻿@model List<MostViewPostsDto>
+<!-- Chart.js CDN linkleri -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+    .link {
+        text-decoration: none;
+        color: grey;
+        transition-duration: 150ms;
+    }
+
+        .link:hover {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+    canvas {
+        max-width: 800px; /* Grafik genişliğini ayarlayabilirsiniz */
+        margin: 20px 0;
+    }
+</style>
+
+@if (Model != null)
+{
+    <canvas id="myChart" width="800" height="400"></canvas>
+
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var titles = @Html.Raw(Json.Serialize(Model.Select(x => x.Title)));
+        var viewCounts = @Html.Raw(Json.Serialize(Model.Select(x => x.ViewCount)));
+
+        var colors = [
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 0, 0, 0.6)',
+            'rgba(0, 255, 0, 0.6)',
+            'rgba(0, 0, 255, 0.6)',
+            'rgba(128, 0, 128, 0.6)',
+            'rgba(0, 128, 128, 0.6)',
+            'rgba(128, 128, 0, 0.6)',
+            'rgba(255, 140, 0, 0.6)',
+            'rgba(0, 0, 128, 0.6)',
+            'rgba(128, 0, 0, 0.6)',
+            'rgba(0, 128, 0, 0.6)',
+            'rgba(255, 255, 0, 0.6)',
+            'rgba(0, 255, 255, 0.6)',
+            'rgba(255, 0, 255, 0.6)',
+            'rgba(192, 192, 192, 0.6)',
+            'rgba(128, 128, 128, 0.6)',
+            'rgba(0, 0, 0, 0.6)',
+            'rgba(255, 127, 80, 0.6)',
+            'rgba(70, 130, 180, 0.6)',
+            'rgba(107, 142, 35, 0.6)',
+            'rgba(255, 165, 0, 0.6)',
+            'rgba(0, 128, 0, 0.6)',
+            'rgba(0, 128, 128, 0.6)',
+            'rgba(0, 0, 128, 0.6)',
+            'rgba(128, 0, 0, 0.6)',
+            'rgba(139, 69, 19, 0.6)',
+            'rgba(255, 69, 0, 0.6)',
+            'rgba(255, 0, 255, 0.6)',
+            'rgba(128, 0, 128, 0.6)',
+            'rgba(0, 128, 128, 0.6)',
+            'rgba(128, 128, 0, 0.6)',
+            'rgba(255, 140, 0, 0.6)',
+            'rgba(0, 0, 128, 0.6)',
+            'rgba(128, 0, 0, 0.6)',
+            'rgba(0, 128, 0, 0.6)',
+            'rgba(255, 255, 0, 0.6)',
+            'rgba(0, 255, 255, 0.6)',
+            'rgba(255, 0, 255, 0.6)',
+            'rgba(192, 192, 192, 0.6)',
+            'rgba(128, 128, 128, 0.6)',
+            'rgba(0, 0, 0, 0.6)',
+            'rgba(255, 127, 80, 0.6)',
+            'rgba(70, 130, 180, 0.6)',
+            'rgba(107, 142, 35, 0.6)',
+            'rgba(255, 165, 0, 0.6)'
+        ];
+
+        function getRandomColor() {
+            var randomIndex = Math.floor(Math.random() * colors.length);
+            return colors[randomIndex];
+        }
+
+        var backgroundColors = viewCounts.map(() => getRandomColor());
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: titles,
+                datasets: [{
+                    label: 'View Counts',
+                    data: viewCounts,
+                    backgroundColor: backgroundColors,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
+}

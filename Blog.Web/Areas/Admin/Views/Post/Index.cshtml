@@ -1,0 +1,110 @@
+﻿@model List<PostsDto>
+@{
+    ViewData["Title"] = "Makalelerim";
+}
+
+<link rel="stylesheet" href="~/css/adminpost.css" asp-append-version="true" />
+
+<div class="d-flex justify-content-between">
+
+    <a asp-area="Admin" asp-controller="Post" asp-action="Add" class="btn btn-success d-flex align-items-center" role="button">
+        <i class='bx bx-plus'></i>
+        <span class="ms-2">Yeni Makale</span>
+    </a>
+</div>
+
+<div class="card w-100 p-3 rounded-5 mt-4 table-responsive">
+    <table class="w-100 post-table">
+        <thead>
+            <tr>
+                <th class="py-3" scope="col">#</th>
+                <th class="py-3" scope="col">Başlık</th>
+                <th class="py-3" scope="col">Kategori</th>
+                <th class="py-3" scope="col">Görüntülenme Sayısı</th>
+                <th class="py-3" scope="col">Tarih</th>
+                <th class="py-3" scope="col">Durum</th>
+                <th class="py-3" scope="col">İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr class="post-row border-top">
+                        <th class="py-3" scope="row">@(i + 1)</th>
+                        <td class="py-3">@Model[i].Title</td>
+                        <td class="py-3">
+                            @{
+                                if (Model[i].Category.IsActive)
+                                {
+                                    <span class="badge text-bg-success">@Model[i].Category.Name</span>
+                                }
+                                else
+                                {
+                                    <span class="badge text-bg-danger">@Model[i].Category.Name</span>
+                                }
+                            }
+                        </td>
+                        <td class="py-3">@Model[i].ViewCount</td>
+                        <td class="py-3">@Model[i].CreatedTime</td>
+                        <td class="py-3">
+                            @{
+                                if (Model[i].IsActive)
+                                {
+                                    <span class="badge text-bg-success">Aktif</span>
+                                }
+                                else
+                                {
+                                    <span class="badge text-bg-warning">Aktif Değil</span>
+                                }
+                            }
+                        </td>
+                        <td class="py-3">
+                            <div class="d-flex gap-2">
+                                <a class="btn btn-primary btn-sm"
+                                   data-id="@Model[i].Id"
+                                   asp-area="Admin" asp-controller="Post" asp-action="Update" asp-route-id="@Model[i].Id">
+                                    <i class='bx bxs-edit'></i>
+                                </a>
+                                <a class="btn btn-danger btn-sm"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#confirmDeleteModal-@Model[i].Id">
+                                    <i class='bx bxs-eraser'></i> Sil
+                                </a>
+                            </div>
+
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="confirmDeleteModal-@Model[i].Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Makaleyi Sil</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Makaleyi silmek istediğinizden emin misiniz?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a class="btn btn-primary btn-sm"
+                                               data-bs-dismiss="modal">
+                                                <i class="fa-solid fa-xmark"></i> İptal
+                                            </a>
+                                            <a class="btn btn-danger btn-sm"
+                                               data-id="@Model[i].Id"
+                                               asp-area="Admin" asp-controller="Post" asp-action="Delete" asp-route-postId="@Model[i].Id">
+                                                <i class='bx bxs-eraser'></i> Evet
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+</div>

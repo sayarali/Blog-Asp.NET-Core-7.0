@@ -1,0 +1,25 @@
+﻿@model List<CategoryDto>
+
+<style>
+    link {
+        text-decoration: none;
+        color: grey;
+        transition-duration: 150ms;
+    }
+    .link:hover {
+        background-color: #f0f0f0;
+        color: #333;
+    }
+
+      
+</style>
+@foreach (var item in Model)
+{
+    
+    <a asp-controller="Category" asp-action="Index" asp-route-id="@item.Id"
+       class="p-2 @(Model.Count < 10 ? "d-block" : "") link">
+        @item.Name
+        <box-icon name='right-arrow-alt'></box-icon>
+    </a>
+
+}

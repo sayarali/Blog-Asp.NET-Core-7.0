@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Anasayfa";
+}
+
+<div class="row mb-3">
+    <div class="col-12 col-lg-4 mt-2">
+        <div class="card p-3 rounded-5" style="height: 19rem">
+            <h6 class="mt-2">Son Yazılarım</h6>
+            <hr />
+            <div class="overflow-y-auto">
+                @await Component.InvokeAsync("LastMyPosts")
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-4 mt-2">
+        <div class="card p-3 rounded-5" style="height: 19rem">
+            <h6 class="mt-2">Bu Ay En Çok Okunanlar</h6>
+            <hr />
+            <div class="overflow-y-auto">
+                @await Component.InvokeAsync("MostViewedThisMonth")
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-4 mt-2">
+        <div class="card p-3 rounded-5" style="height: 19rem">
+            <h6 class="mt-2">En Çok Okunanlar</h6>
+            <hr />
+            <div class="overflow-y-auto">
+                @await Component.InvokeAsync("MostViewedMy")
+            </div>
+        </div>
+    </div>
+</div>

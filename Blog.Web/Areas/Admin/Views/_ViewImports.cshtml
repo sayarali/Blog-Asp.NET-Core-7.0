@@ -1,0 +1,13 @@
+﻿@namespace Blog.Web.Areas.Admin.Views
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Blog.Entity.Entities
+@using Blog.Entity.DTOs.Auth
+@using Blog.Entity.DTOs.Posts
+@using Blog.Entity.DTOs.Categories
+@using Blog.Entity.DTOs.User
+@using Blog.Entity.DTOs.About
+@using Blog.Service.Services.Abstracts
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<TUser> UserManager
+@inject SignInManager<TUser> SignInManager
+@inject IImageService ImageService

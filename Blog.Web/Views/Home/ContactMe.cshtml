@@ -1,0 +1,34 @@
+﻿@model Contact
+@{
+    ViewData["Title"] = "Bana Ulaşın";
+}
+
+
+
+
+
+
+<div class="container w-50 mt-3">
+
+    <h3 class="text-center">Bana Ulaşın</h3>
+    <form asp-controller="Home" asp-action="SendContact" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <input asp-for="Id" type="hidden" />
+        <div class="mb-3">
+            <label for="name" class="form-label">Adınız <span class="text-danger">*</span></label>
+            <input asp-for="Name" type="name" class="form-control" id="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">E-posta adresiniz <span class="text-danger">*</span></label>
+            <input asp-for="Email" type="email" class="form-control" id="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Mesajınız <span class="text-danger">*</span></label>
+            <textarea asp-for="Message" class="form-control" id="message" rows="7" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-sm btn-success">Gönder</button>
+    </form>
+    <hr />
+    <a href="mailto: iletisim@alisayar.com" class="text-secondary mt-2">iletisim@alisayar.com</a>
+
+</div>

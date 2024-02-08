@@ -1,0 +1,105 @@
+﻿@model List<Comment>
+
+@{
+    ViewData["Title"] = "Yorumlar";
+}
+
+<div class="card w-100 p-3 rounded-5 mt-4 table-responsive">
+    <table class="w-100 post-table">
+        <thead>
+            <tr>
+                <th class="col py-3" scope="col">#</th>
+                <th class="col-2 py-3" scope="col">Makale</th>
+                <th class="col-2 py-3" scope="col">Yorum Yapan</th>
+                <th class="col-4 py-3" scope="col">Yorum</th>
+                <th class="col-1 py-3" scope="col">Tarih</th>
+                <th class="col-1 py-3 text-center" scope="col">Durum</th>
+                <th class="col-2 py-3" scope="col">İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr class="post-row border-top">
+                        <th class="py-3" scope="row">@(i + 1)</th>
+                        <td class="py-3">
+                            <a asp-area="" asp-controller="Post" asp-route-id=" @Model[i].Post.Id" class="text-decoration-none text-secondary">
+                                @Model[i].Post.Title
+                            </a>
+
+                        </td>
+                        <td class="py-3">
+                            @if (Model[i].UserId != null)
+                            {
+                                <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-username="@Model[i].User.UserName" class="text-decoration-none text-secondary">
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <img id="profile-img" class="img-fluid rounded-circle"
+                                             src="@(Model[i].User.Image?.Data != null ? $"data:image/jpeg;base64,{Convert.ToBase64String(@Model[i].User.Image.Data)}" : "/img/profile.png")"
+                                             alt="Resim" style="width: 35px; height: 35px; object-fit: cover">
+                                        <div>
+                                            <div style="font-size: 0.8rem">@Model[i].User.FirstName @Model[i].User.LastName</div>
+                                            <div style="font-size: 0.8rem">@Model[i].User.Email</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            }
+                            else
+                            {
+                                <div class="d-flex gap-2 align-items-center">
+                                    <img id="profile-img" class="img-fluid rounded-circle"
+                                         src="/img/profile.png" )"
+                                         alt="Resim" style="width: 35px; height: 35px; object-fit: cover">
+                                    <div>
+                                        <div style="font-size: 0.8rem">@Model[i].Name <span class="fw-light fst-italic">Misafir</span></div>
+                                        <div style="font-size: 0.8rem">@Model[i].Email</div>
+                                    </div>
+                                </div>
+                            }
+                        </td>
+                        <td class="py-3">
+                            @Model[i].Content
+                        </td>
+                        <td class="py-3">@Model[i].CreatedTime</td>
+                        <td class="py-3 text-center">
+                            @{
+                                if (Model[i].IsActive)
+                                {
+                                    <i class="fa-regular fa-circle-check text-success"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa-regular fa-circle-xmark text-danger"></i>
+                                }
+                            }
+                        </td>
+                        <td class="py-3">
+                            <div class="d-flex gap-2">
+                                <a class="btn btn-success btn-sm"
+                                   data-id="@Model[i].Id"
+                                   asp-area="Admin" asp-controller="Comment" asp-action="SetActive" asp-route-commentId="@Model[i].Id">
+                                    <i class="fa-solid fa-check"></i>
+                                </a>
+                                <a class="btn btn-danger btn-sm"
+                                   data-id="@Model[i].Id"
+                                   asp-area="Admin" asp-controller="Comment" asp-action="SetDeactive" asp-route-commentId="@Model[i].Id">
+                                    <i class="fa-solid fa-times"></i>
+                                </a>
+                                <a class="btn btn-danger btn-sm"
+                                   data-id="@Model[i].Id"
+                                   asp-area="Admin" asp-controller="Comment" asp-action="Delete" asp-route-commentId="@Model[i].Id">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </div>
+
+
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+</div>
+   

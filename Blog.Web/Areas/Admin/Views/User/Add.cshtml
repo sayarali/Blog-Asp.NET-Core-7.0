@@ -1,0 +1,69 @@
+﻿@model AddUserDto
+
+@{
+    ViewData["Title"] = "Yeni Kullanıcı";
+}
+
+
+
+<div class="card rounded-5 p-4 mt-4 col-12 col-xl-6">
+
+    <form asp-controller="User" asp-action="Add" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="d-flex gap-2 mb-3">
+            <div class="input-group w-100">
+                <span class="input-group-text" id="username"><i class='bx bx-user'></i></span>
+                <input asp-for="UserName" type="text" class="form-control" placeholder="Kullanıcı Adı" aria-label="Username" aria-describedby="username" autocomplete="off">
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="input-group w-100">
+                <span class="input-group-text" id="password"><i class='bx bx-lock-alt'></i></span>
+                <input asp-for="Password" type="password" class="form-control" placeholder="Parola" aria-label="Password" aria-describedby="password" autocomplete="new-password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="input-group">
+                <span class="input-group-text" id="email">@@</span>
+                <input asp-for="Email" type="email" class="form-control" placeholder="E-posta" aria-label="Email" aria-describedby="email">
+            </div>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex gap-2 mb-3">
+            <div class="input-group w-100">
+                <span class="input-group-text" id="firstName"><i class='bx bx-user-circle'></i></span>
+                <input asp-for="FirstName" type="text" class="form-control" placeholder="Adı" aria-label="FirstName" aria-describedby="firstName">
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="input-group w-100">
+                <span class="input-group-text" id="lastName"><i class='bx bx-user-circle'></i></span>
+                <input asp-for="LastName" type="text" class="form-control" placeholder="Soyadı" aria-label="lastName" aria-describedby="lastName">
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="input-group">
+                <span class="input-group-text" id="phoneNumber"><i class='bx bx-phone'></i></span>
+                <input asp-for="PhoneNumber" type="tel" class="form-control" placeholder="Telefon" aria-label="PhoneNumber" aria-describedby="phoneNumber">
+            </div>
+
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+
+        <div class="input-group mb-3">
+            <select id="role" class="form-select" asp-for="RoleId" asp-items="@(new SelectList(Model.Roles, "Id", "Name"))"></select>
+            <label class="input-group-text" for="role">Rol</label>
+        </div>
+
+
+
+        <div class="d-flex gap-3 align-items-center mt-4">
+
+            <button type="submit" class="btn btn-success"><i class="fa-solid fa-user-check"></i> Kaydet</button>
+        </div>
+
+    </form>
+
+</div>

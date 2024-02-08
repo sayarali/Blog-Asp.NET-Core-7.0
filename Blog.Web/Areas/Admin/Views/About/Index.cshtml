@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "Hakkımda Düzenle";
+}
+
+@model AboutDto
+
+<div class="card rounded-5 p-4 mt-4">
+
+    <form asp-controller="About" asp-action="Update" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+
+
+        @if (@Model.Image != null)
+        {
+            <div class="text-center p-3">
+                <img class="mx-auto rounded-circle im-fluid" id="current-image" src="data:image/jpeg;base64,@Convert.ToBase64String(@Model.Image?.Data)" alt="Resim" style="width: 150px; height: 150px; object-fit: cover">
+                <img class="mx-auto rounded-circle im-fluid" id="image-preview" src="#" alt="Resim önizleme" style="display: none; width: 150px; height: 150px; object-fit: cover">
+            </div>
+
+        }
+        <div class="mb-3">
+            <label for="image" class="form-label">Resmi Değiştir</label>
+            <div class="d-flex gap-3 align-items-center justify-content-between">
+                <input asp-for="ImageFile" type="file" id="image" name="ImageFile" class="form-control">
+                <a id="kaldirbtn" class="btn btn-sm btn-danger" onclick="removeImage()" style="display: none">Kaldır</a>
+            </div>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Başlık</label>
+            <input asp-for="Title" type="text" class="form-control" id="title" required>
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">Yazı</label>
+            <textarea asp-for="Content" class="form-control" id="content" rows="10" required></textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+     
+        <button type="submit" class="btn btn-sm btn-success">Kaydet</button>
+    </form>
+
+</div>
+
+<script>document.getElementById('image').addEventListener('change', function () {
+        var fileInput = this;
+        var previewImage = document.getElementById('image-preview');
+        var currentImage = document.getElementById('current-image');
+        var btn = document.getElementById('kaldirbtn');
+
+        if (fileInput.files.length === 0 || !window.FileReader) {
+            return;
+        }
+
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            previewImage.src = e.target.result;
+            previewImage.style.display = 'block';
+            currentImage.style.display = 'none';
+            btn.style.display = 'block';
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+    });
+    function removeImage() {
+        var fileInput = document.getElementById('image');
+        var previewImage = document.getElementById('image-preview');
+        var currentImage = document.getElementById('current-image');
+        var btn = document.getElementById('kaldirbtn');
+        btn.style.display = 'none';
+        previewImage.style.display = 'none';
+        currentImage.style.display = 'block';
+        fileInput.value = '';
+
+        previewImage.src = '#';
+    }</script>

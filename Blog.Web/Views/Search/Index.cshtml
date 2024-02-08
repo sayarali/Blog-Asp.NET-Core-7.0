@@ -1,0 +1,150 @@
+﻿@model SearchResultDto
+
+
+<div class="container col-lg-4 col-10">
+
+    <form asp-area="" asp-controller="Search" asp-action="Index" method="get">
+        <div class="input-group">
+            <input asp-for="@Model.SearchText" type="text" name="s" class="form-control" placeholder="Arama yap">
+            <button class="btn btn-outline-secondary" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+    <div style="font-size: 0.8rem" class="text-center mt-2">@Model.TotalCount sonuç bulundu.</div>
+</div>
+
+@{
+    ViewData["Title"] = Model.SearchText;
+}
+
+<style>
+    .post-link:hover {
+        color: orange !important;
+        transition-duration: 150ms;
+    }
+
+    #post-image:hover {
+        opacity: 0.7;
+        transition-duration: 150ms;
+    }
+</style>
+@functions {
+    public string StripHtml(string html)
+    {
+        var doc = new HtmlAgilityPack.HtmlDocument();
+        doc.LoadHtml(html);
+
+        return doc.DocumentNode.InnerText;
+    }
+}
+<div class="container col-lg-9 col-11">
+
+    <div class="row">
+        <div class="p-3">
+            @foreach (var post in Model.Posts)
+            {
+                @if (post.Image.Data != null)
+                {
+                    <div class="card my-3">
+                        <div class="row">
+                            <div class="col-12 col-md-6" style="padding: 1rem 2rem">
+                                <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id" class="text-decoration-none text-secondary post-link">
+                                    <h6 class="text-uppercase fw-bold">@post.Title</h6>
+                                </a>
+                                <p class="text-secondary mt-3">
+                                    @{
+                                        string strippedContent = StripHtml(post.Content);
+                                        string truncatedContent = strippedContent.Length > 350 ? strippedContent.Substring(0, 350) + "..." : strippedContent;
+                                    }
+                                    @Html.Raw(truncatedContent)
+                                </p>
+                                <hr />
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a asp-controller="Profile" asp-action="Index" asp-route-username="@post.User.UserName" class="text-decoration-none text-secondary">
+                                        <div class="d-flex gap-2 align-items-center">
+                                            <img id="profile-img" class="img-fluid rounded-circle"
+                                                 src="@(post.User.Image?.Data != null ? $"data:image/jpeg;base64,{Convert.ToBase64String(post.User.Image.Data)}" : "/img/profile.png")"
+                                                 alt="Resim" style="width: 35px; height: 35px; object-fit: cover">
+                                            <div>
+                                                <div style="font-size: 0.8rem">@post.User.FirstName @post.User.LastName</div>
+                                                <div style="font-size: 0.8rem">@post.CreatedTime.ToString("dd.MM.yyyy")</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div>
+                                        <span style="font-size: 0.7rem; opacity: 0.8">@post.ViewCount Görüntüleme</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                @if (post.Image.Data != null)
+                                {
+                                    <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id" id="post-image">
+                                        <img class="mx-auto" src="data:image/jpeg;base64,@Convert.ToBase64String(post.Image?.Data)" alt="Resim" style="width: 100%; height: 100%; object-fit: cover">
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="card my-3" style="padding: 1rem 2rem">
+                        <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id" class="text-decoration-none text-secondary post-link">
+                            <h6 class="text-uppercase fw-bold">@post.Title</h6>
+                        </a>
+                        <p class="text-secondary mt-3">
+                            @{
+                                string strippedContent = StripHtml(post.Content);
+                                string truncatedContent = strippedContent.Length > 350 ? strippedContent.Substring(0, 350) + "..." : strippedContent;
+                            }
+
+                            @Html.Raw(truncatedContent)
+                        </p>
+                        <hr />
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a asp-controller="Profile" asp-action="Index" asp-route-username="@post.User.UserName" class="text-decoration-none text-secondary">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <img id="profile-img" class="img-fluid rounded-circle"
+                                         src="@(post.User.Image?.Data != null ? $"data:image/jpeg;base64,{Convert.ToBase64String(post.User.Image.Data)}" : "/img/profile.png")"
+                                         alt="Resim" style="width: 35px; height: 35px; object-fit: cover">
+                                    <div>
+                                        <div style="font-size: 0.8rem">@post.User.FirstName @post.User.LastName</div>
+                                        <div style="font-size: 0.8rem">@post.CreatedTime.ToString("dd.MM.yyyy")</div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div>
+                                <span style="font-size: 0.7rem; opacity: 0.8">@post.ViewCount Görüntüleme</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            <nav aria-label="">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item @(Model.ShowPrevious ? "" : "disabled")">
+                        <a class="page-link" href="@Url.Action("Index", new { s=Model.SearchText, page = 1 })"><i class="fa-solid fa-angles-left"></i></a>
+                    </li>
+                    <li class="page-item @(Model.ShowPrevious ? "" : "disabled")">
+                        <a class="page-link btn-outline-secondary" href="@Url.Action("Index", new { s=Model.SearchText, page = Model.CurrentPage - 1 })"><i class="fa-solid fa-angle-left"></i></a>
+                    </li>
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                            <a class="page-link btn-outline-secondary" href="@Url.Action("Index", new { s=Model.SearchText, page = i })">@i</a>
+                        </li>
+                    }
+                    <li class="page-item @(Model.ShowNext ? "" : "disabled")">
+                        <a class="page-link btn-outline-secondary" href="@Url.Action("Index", new { s=Model.SearchText, page = Model.CurrentPage + 1 })"><i class="fa-solid fa-angle-right"></i></a>
+                    </li>
+                    <li class="page-item @(Model.ShowNext ? "" : "disabled")">
+                        <a class="page-link" href="@Url.Action("Index", new { s=Model.SearchText, page = Model.TotalPages })"><i class="fa-solid fa-angles-right"></i></a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

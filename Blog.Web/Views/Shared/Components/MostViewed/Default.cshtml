@@ -1,0 +1,22 @@
+﻿@model List<MostViewPostsDto>
+
+<style>
+    .link {
+        text-decoration: none;
+        color: grey;
+        transition-duration: 150ms;
+    }
+
+        .link:hover {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+</style>
+@foreach (var item in Model)
+{
+    <a asp-controller="Post" asp-action="Index" asp-route-id="@item.Id"
+       class="p-2 d-flex justify-content-between d-block align-items-center link">
+        <span>@item.Title</span>
+        <span class="badge rounded-pill text-bg-secondary">@item.ViewCount</span>
+    </a>
+}

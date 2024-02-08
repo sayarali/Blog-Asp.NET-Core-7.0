@@ -1,22 +1,90 @@
-﻿html {
-  font-size: 14px;
+﻿body {
+    background-color: #F6F6F6 !important;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+* {
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+
+.account:hover {
+    cursor: pointer;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.profile-picture {
+    border-style: solid;
+    border-color: #E48400;
+    border-width: 1px;
+    border-radius: 50%;
+    width: 2.8rem;
+    height: 2.8rem;
+    object-fit: cover;
 }
 
-body {
-  margin-bottom: 60px;
+.dropdown-menu ul li a {
+    color: grey;
+    font-size: 0.9rem;
+    transition-duration: 150ms;
+}
+
+    .dropdown-menu ul li a:hover {
+        background: #E0E0E0;
+        border-radius: 6px;
+        transition-duration: 150ms;
+    }
+
+
+.login {
+    color: grey;
+    font-size: 0.9rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    transition-duration: 150ms;
+    vertical-align: central;
+}
+
+    .login:hover {
+        background: #FFE096;
+        border-radius: 6px;
+        color: #E48400;
+        transition-duration: 150ms;
+    }
+
+.save-btn {
+    background: #FFE096 !important;
+    transition-duration: 150ms;
+}
+
+    .save-btn:hover {
+        background: #E48400 !important;
+        color: white !important;
+    }
+
+
+.pagination > li.active > a {
+    background: #E48400 !important;
+    color: white !important;
+    border: 1px solid #E48400 !important;
+}
+.pagination > li.disabled > a {
+    color: grey !important;
+}
+.pagination > li > span {
+    border: 1px solid #E48400 !important;
+}
+.page-link {
+    color: #E48400 !important;
+}
+.page-link:hover {
+    background-color: #E48400 !important;
+    color: white !important;
+}
+
+.navbar-nav > li > .active {
+    color: #E48400 !important;
+}
+
+.nav-link:hover {
+    color: #E48400 !important;
 }

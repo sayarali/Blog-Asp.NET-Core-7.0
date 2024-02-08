@@ -1,4 +1,16 @@
-﻿@using Blog.Web
+﻿@namespace Blog.Web.Views
+@using Blog.Web
 @using Blog.Web.Models
+@using Blog.Entity.Entities
+@using Blog.Entity.DTOs.Posts
+@using Blog.Entity.DTOs.Auth
+@using Blog.Entity.DTOs.User
+@using Blog.Entity.DTOs.Categories
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
+@using Blog.Service.Services.Abstracts
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<TUser> UserManager
+@inject SignInManager<TUser> SignInManager
+@inject IImageService ImageService
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@inject ICategoryService CategoryService

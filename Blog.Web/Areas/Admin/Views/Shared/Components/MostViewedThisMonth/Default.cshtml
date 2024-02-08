@@ -1,0 +1,61 @@
+﻿@model List<MostViewPostsDto>
+<!-- Chart.js CDN linkleri -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+    .link {
+        text-decoration: none;
+        color: grey;
+        transition-duration: 150ms;
+    }
+
+        .link:hover {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+    canvas {
+        max-width: 400px; /* Grafik genişliğini ayarlayabilirsiniz */
+        margin: 20px 0;
+    }
+</style>
+
+@if (Model != null)
+{
+    <canvas id="chart1" width="400" height="400"></canvas>
+
+    <script>
+        var ctx = document.getElementById('chart1').getContext('2d');
+        var titles = @Html.Raw(Json.Serialize(Model.Select(x => x.Title)));
+        var viewCounts = @Html.Raw(Json.Serialize(Model.Select(x => x.ViewCount)));
+
+        var backgroundColors = [
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 0, 0, 0.6)',
+            'rgba(0, 255, 0, 0.6)',
+            'rgba(0, 0, 255, 0.6)',
+            'rgba(128, 0, 128, 0.6)',
+        ];
+
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: titles,
+                datasets: [{
+                    data: viewCounts,
+                    backgroundColor: backgroundColors,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+}

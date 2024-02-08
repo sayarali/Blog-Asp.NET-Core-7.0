@@ -1,0 +1,92 @@
+﻿@model UserRegisterDto
+
+@{
+    Layout = null;
+}
+
+
+
+
+<html lang="en" class="light-style layout-wide  customizer-hide" dir="ltr" data-theme="theme-default" data-assets-path="~/sneat/assets/" data-template="vertical-menu-template-free">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Kayıt Ol</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/a781bd13a7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="register-container align-items-center d-flex col-lg-5 col-11">
+        <div class="card border-0 rounded-5 w-100 px-2 py-5">
+            <div class="d-flex justify-content-center">
+                <img src="/logo/logo.png" width="60rem" />
+            </div>
+            <div class="card-body">
+
+                <h3 class="mb-5 mt-2 text-center">Merhaba! 👋</h3>
+
+                <form asp-controller="Auth" asp-action="Register" id="formAuthentication" class="mb-3" method="post">
+                    <div class="d-flex justify-content-between gap-2 mb-3">
+                        <div class="w-100">
+                            <label asp-for="FirstName" class="form-label">Adı <span class="text-danger">*</span></label>
+                            <input asp-for="FirstName" type="text" class="form-control">
+                        </div>
+                        <div class="w-100">
+                            <label asp-for="LastName" class="form-label">Soyadı <span class="text-danger">*</span></label>
+                            <input asp-for="LastName" type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="UserName" class="form-label">Kullanıcı Adı <span class="text-danger">*</span></label>
+                        <input asp-for="UserName" type="text" class="form-control" autocomplete="off">
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label">E-posta adresi <span class="text-danger">*</span></label>
+                        <input asp-for="Email" type="email" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="PhoneNumber" class="form-label">Telefon</label>
+                        <input asp-for="PhoneNumber" type="tel" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-label" for="password">Parola <span class="text-danger">*</span></div>
+                        <input asp-for="Password" type="password" id="password" class="form-control" aria-describedby="password" autocomplete="new-password" />
+                    </div>
+
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <div class="mt-4">
+                        <button class="btn login-btn d-grid w-50 mx-auto" type="submit">Kayıt Ol</button>
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+
+
+</body>
+
+</html>

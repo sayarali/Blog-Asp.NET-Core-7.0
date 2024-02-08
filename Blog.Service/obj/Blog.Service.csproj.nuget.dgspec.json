@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/alisayar/Projects/Blog/Blog.Service/Blog.Service.csproj": {}
+    "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Service\\Blog.Service.csproj": {}
   },
   "projects": {
-    "/Users/alisayar/Projects/Blog/Blog.Service/Blog.Service.csproj": {
+    "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Core\\Blog.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/alisayar/Projects/Blog/Blog.Service/Blog.Service.csproj",
-        "projectName": "Blog.Service",
-        "projectPath": "/Users/alisayar/Projects/Blog/Blog.Service/Blog.Service.csproj",
-        "packagesPath": "/Users/alisayar/.nuget/packages/",
-        "outputPath": "/Users/alisayar/Projects/Blog/Blog.Service/obj/",
+        "projectUniqueName": "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Core\\Blog.Core.csproj",
+        "projectName": "Blog.Core",
+        "projectPath": "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Core\\Blog.Core.csproj",
+        "packagesPath": "C:\\Users\\sayar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/alisayar/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\sayar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -53,7 +55,238 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.310/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.DataAccess\\Blog.DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.DataAccess\\Blog.DataAccess.csproj",
+        "projectName": "Blog.DataAccess",
+        "projectPath": "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.DataAccess\\Blog.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\sayar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.DataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\sayar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Core\\Blog.Core.csproj": {
+                "projectPath": "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Core\\Blog.Core.csproj"
+              },
+              "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Entity\\Blog.Entity.csproj": {
+                "projectPath": "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Entity\\Blog.Entity.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.13, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Entity\\Blog.Entity.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Entity\\Blog.Entity.csproj",
+        "projectName": "Blog.Entity",
+        "projectPath": "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Entity\\Blog.Entity.csproj",
+        "packagesPath": "C:\\Users\\sayar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Entity\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\sayar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Core\\Blog.Core.csproj": {
+                "projectPath": "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Core\\Blog.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.13, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Service\\Blog.Service.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Service\\Blog.Service.csproj",
+        "projectName": "Blog.Service",
+        "projectPath": "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Service\\Blog.Service.csproj",
+        "packagesPath": "C:\\Users\\sayar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Service\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\sayar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.DataAccess\\Blog.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.DataAccess\\Blog.DataAccess.csproj"
+              },
+              "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Entity\\Blog.Entity.csproj": {
+                "projectPath": "C:\\Users\\sayar\\Desktop\\Proje Son\\Blog\\Blog.Entity\\Blog.Entity.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

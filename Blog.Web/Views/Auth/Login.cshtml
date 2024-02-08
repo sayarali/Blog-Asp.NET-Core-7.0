@@ -1,0 +1,86 @@
+﻿@model UserLoginDto
+
+@{
+    Layout = null;
+}
+
+
+
+
+<html lang="en" class="light-style layout-wide  customizer-hide" dir="ltr" data-theme="theme-default" data-assets-path="~/sneat/assets/" data-template="vertical-menu-template-free">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Giriş Yap</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/a781bd13a7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="login-container align-items-center d-flex">
+        <div class="card border-0 rounded-5 w-100 px-2 py-5">
+            <div class="d-flex justify-content-center">
+                <img src="/logo/logo.png" width="60rem" />
+            </div>
+            <div class="card-body">
+
+                <h3 class="mb-5 mt-2 text-center">Merhaba! 👋</h3>
+
+                <form asp-controller="Auth" asp-action="Login" id="formAuthentication" class="mb-3" method="post">
+                    <div asp-validation-summary="All"></div>
+                    <div class="mb-3">
+                        <label asp-for="UserName" class="form-label">Kullanıcı Adı ya da E-posta</label>
+                        <input asp-for="UserName" type="text" class="form-control" autofocus>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-label" for="password">Parola</div>
+                        <input asp-for="Password" type="password" id="password" class="form-control" name="password" aria-describedby="password" />
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="form-check">
+                                <input asp-for="RememberMe" class="form-check-input" type="checkbox" id="remember-me">
+                                <label asp-for="RememberMe" class="form-check-label" for="remember-me">
+                                    Beni Hatırla
+                                </label>
+                            </div>
+                            @*<a asp-area="" asp-controller="Auth" asp-action="ForgotPassword" class="icon-link icon-link-hover link-success link-underline-opacity-25">
+                                <small>Parolamı Unuttum</small>
+                            </a>*@
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn login-btn d-grid w-100" type="submit">Giriş Yap</button>
+                    </div>
+                    <div class="text-center mt-1">
+                        Hesabınız yok mu? <a asp-area="" asp-controller="Auth" asp-action="Register" class="text-decoration-none text-warning fst-italic">Kayıt Ol</a>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+ 
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+
+
+</body>
+
+</html>

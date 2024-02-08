@@ -1,0 +1,8 @@
+﻿
+.post-row {
+    transition: all 200ms;
+}
+.post-row:hover {
+    cursor: pointer;
+    background-color:lightgray !important;
+}

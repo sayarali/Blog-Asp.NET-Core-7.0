@@ -1,0 +1,27 @@
+﻿@model List<TitleDatePostDto>
+
+<style>
+    .link {
+        text-decoration: none;
+        color: grey;
+        transition-duration: 150ms;
+    }
+
+        .link:hover {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+</style>
+@if (Model != null)
+{
+    @foreach (var item in Model)
+    {
+        <a asp-area="" asp-controller="Post" asp-action="Index" asp-route-id="@item.Id"
+           class="p-2 d-flex justify-content-between d-block align-items-center link">
+            <span>@item.Title</span>
+            <span class="badge rounded-pill text-bg-info">@item.CreatedTime.ToString("dd.MM.yyyy")</span>
+        </a>
+    }
+
+}
+

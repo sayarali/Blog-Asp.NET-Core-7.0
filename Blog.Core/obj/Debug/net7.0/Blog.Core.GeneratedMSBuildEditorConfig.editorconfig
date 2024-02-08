@@ -8,4 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Blog.Core
-build_property.ProjectDir = /Users/alisayar/Projects/Blog/Blog.Core/
+build_property.ProjectDir = C:\Users\sayar\Desktop\Proje Son\Blog\Blog.Core\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

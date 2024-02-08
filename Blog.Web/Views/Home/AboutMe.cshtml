@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Hakkımda";
+}
+
+@model About
+@if (Model != null)
+{
+    <div class="row">
+        <div class="container mt-3 col-12 col-lg-7">
+            <div class="text-center">
+                @if (@Model.Image != null)
+                {
+                    <img class="img-fluid rounded-circle mb-3" src="data:image/jpeg;base64,@Convert.ToBase64String(@Model.Image?.Data)" alt="Resim" style="width: 150px; height:150px; object-fit:cover">
+                }
+            </div>
+
+            <h3 class="mt-2 text-center">@Model.Title</h3>
+            <p>@Html.Raw(Model.Content.Replace("\n", "<br/>"))</p>
+        </div>
+    </div>
+
+}
+

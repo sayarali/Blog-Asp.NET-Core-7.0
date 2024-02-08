@@ -1,0 +1,117 @@
+﻿@model UpdatePostDto
+
+
+@{
+    ViewData["Title"] = "Makale Düzenle";
+}
+
+
+
+<div class="card rounded-5 p-4 mt-4">
+
+    <form asp-controller="Post" asp-action="Update" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+
+
+        @if (@Model.Image != null)
+        {
+            <div class="text-center p-3">
+                <img id="post-image2" class="mx-auto" src="data:image/jpeg;base64,@Convert.ToBase64String(@Model.Image?.Data)" style="display: block; width: 55%; object-fit: cover">
+                
+            </div>
+
+        }
+        <div class="text-center p-3">
+            <img class="mx-auto" id="image-preview" src="#" style="display: none; width: 55%; object-fit: cover">
+        </div>
+        <div class="row mt-3">
+            <div class="mb-3 col-6">
+                <label for="category" class="form-label">Kategori</label>
+                <select id="category" class="form-control" asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="image" class="form-label">Resmi Değiştir</label>
+                <div class="d-flex gap-3 align-items-center justify-content-between">
+                    <input asp-for="ImageFile" type="file" id="image" name="ImageFile" class="form-control">
+                    <a id="kaldirbtn" class="btn btn-sm btn-danger" onclick="removeImage()" style="display: none">Kaldır</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Başlık</label>
+            <input asp-for="Title" type="text" class="form-control" id="title">
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label for="editor" class="form-label">İçerik</label>
+            <textarea asp-for="Content" id="editor"></textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+        <div class="mb-3 form-check">
+            <input asp-for="IsActive" type="checkbox" class="form-check-input" id="active">
+            <label class="form-check-label" for="active">Aktif</label>
+        </div>
+        <button type="submit" class="btn btn-success">Kaydet</button>
+    </form>
+
+</div>
+
+<script src="https://cdn.tiny.cloud/1/gikupguzfzf9zngbl73ttdzloqwy8s8bpnq1xd0ybhrzg4s6/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+    document.getElementById('image').addEventListener('change', function () {
+        var fileInput = this;
+        var previewImage = document.getElementById('image-preview');
+        var postImage = document.getElementById('post-image2');
+        var btn = document.getElementById('kaldirbtn');
+
+        if (fileInput.files.length === 0 || !window.FileReader) {
+            return;
+        }
+
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            previewImage.src = e.target.result;
+            if (postImage != null) {
+                postImage.style.display = 'none';
+            }
+            
+            previewImage.style.display = 'block';
+            btn.style.display = 'block';
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+    });
+    function removeImage() {
+        var fileInput = document.getElementById('image');
+        var previewImage = document.getElementById('image-preview');
+        var postImage = document.getElementById('post-image2');
+        var btn = document.getElementById('kaldirbtn');
+        btn.style.display = 'none';
+        previewImage.style.display = 'none';
+        if (postImage != null) {
+            postImage.style.display = 'block';
+        }
+
+        fileInput.value = '';
+
+        previewImage.src = '#';
+    };
+    tinymce.init({
+        selector: 'textarea',
+        plugins: 'codesample image link lists media wordcount',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+        mergetags_list: [
+            { value: 'First.Name', title: 'First Name' },
+            { value: 'Email', title: 'Email' },
+        ],
+        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+    });
+
+
+    </script>
+
+<script></script>
+

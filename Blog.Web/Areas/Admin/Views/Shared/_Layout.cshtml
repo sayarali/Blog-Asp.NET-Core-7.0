@@ -1,0 +1,280 @@
+﻿
+<!DOCTYPE html>
+
+
+<html lang="tr" dir="ltr" data-theme="theme-default">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>@ViewData["Title"] - Admin Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/a781bd13a7.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <div class="main-container d-flex">
+        <div class="sidebar shadow" id="side_nav">
+            <div class="header-box d-flex justify-content-between align-items-center px-4 py-3">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="text-decoration-none d-flex align-items-center">
+                    <img src="/logo/logo.png" width="50rem" class="" />
+                    <div class="ms-2 text-dark">
+                        <div>
+                            <div>Ali Sayar</div>
+                            <div style="font-size: 0.7rem">Software Developer</div>
+                        </div>
+
+                    </div>
+                </a>
+
+                <button class="btn d-lg-none d-block close-btn px-1 py-0 text-dark fs-2"><i class='bx bx-menu-alt-right'></i></button>
+            </div>
+
+            <ul class="list-unstyled">
+
+                <li class="my-1">
+                    <a asp-area="Admin" asp-controller="Home" asp-action="Index" id="dashboard-link" class="text-decoration-none px-2 py-2 d-block @(ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "active" : "")">
+                        <i class='menu-icon bx bxs-dashboard'></i>Dashboard
+                    </a>
+                </li>
+                <li class="row align-items-center">
+                    <div class="col-2">
+                        <hr />
+                    </div>
+                    <div class="col-10">
+                        <span class="baslik">Sayfa Yönetimi</span>
+                    </div>
+                </li>
+                <li class="my-1">
+                    <a asp-area="Admin" asp-controller="Post" asp-action="Index" id="posts-link" class="text-decoration-none px-2 py-2 d-block @(ViewContext.RouteData.Values["controller"].ToString() == "Post" ? "active" : "")">
+                        <i class="menu-icon bx bx-message-alt-add"></i>Makaleler
+                    </a>
+                </li>
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="my-1">
+                        <a asp-area="Admin" asp-controller="Category" asp-action="Index" id="category-link" class="text-decoration-none px-2 py-2 d-block @(ViewContext.RouteData.Values["controller"].ToString() == "Category" ? "active" : "")">
+                            <i class="menu-icon bx bx-category-alt"></i>Kategoriler
+                        </a>
+                    </li>
+                }
+
+                <li class="my-1">
+                    <a asp-area="Admin" asp-controller="Comment" asp-action="Index" id="comment-link" class="text-decoration-none px-2 py-2 d-block @(ViewContext.RouteData.Values["controller"].ToString() == "Comment" ? "active" : "")">
+                        <i class="menu-icon bx bx-comment"></i>Yorumlar
+                    </a>
+                </li>
+
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="my-1">
+                        <a asp-area="Admin" asp-controller="Contact" asp-action="Index" id="contact-link" class="text-decoration-none px-2 py-2 d-block @(ViewContext.RouteData.Values["controller"].ToString() == "Contact" ? "active" : "")">
+                            <i class='menu-icon bx bx-envelope'></i>Mesajlar
+                        </a>
+                    </li>
+                    <li class="row align-items-center">
+                        <div class="col-2">
+                            <hr />
+                        </div>
+                        <div class="col-10">
+                            <span class="baslik">Kullanıcı Yönetimi</span>
+                        </div>
+                    </li>
+                    <li class="my-1">
+                        <a asp-area="Admin" asp-controller="User" asp-action="Index" id="user-link" class="text-decoration-none px-2 py-2 d-block @(ViewContext.RouteData.Values["controller"].ToString() == "User" ? "active" : "")">
+                            <i class='menu-icon bx bx-user'></i>Kullanıcılar
+                        </a>
+                    </li>
+                }
+                <li class="row align-items-center">
+                    <div class="col-2">
+                        <hr />
+                    </div>
+                    <div class="col-10">
+                        <span class="baslik">Ayarlar</span>
+                    </div>
+                </li>
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="my-1">
+                        <a asp-area="Admin" asp-controller="About" asp-action="Index" class="text-decoration-none px-2 py-2 d-block @(ViewContext.RouteData.Values["controller"].ToString() == "About" ? "active" : "")">
+                            <i class='menu-icon bx bx-cog'></i>
+                            <span class="">Hakkımda Yazısı</span>
+                        </a>
+                    </li>
+                }
+
+                <li class="my-1">
+                    <a asp-area="" asp-controller="Profile" asp-action="Edit" id="profile-link" class="text-decoration-none px-2 py-2 d-block">
+                        <i class='menu-icon bx bxs-user-circle'></i>
+                        <span class="">Profili Düzenle</span>
+                    </a>
+                </li>
+                <li class="my-1">
+                    <a asp-area="" asp-controller="Auth" asp-action="Logout" class="text-decoration-none px-2 py-2 d-block">
+                        <i class='menu-icon bx bx-log-out'></i>
+                        <span class="">Çıkış Yap</span>
+                    </a>
+                </li>
+            </ul>
+
+
+            <ul class="list-unstyled px-4">
+            </ul>
+
+        </div>
+        <div class="content">
+            <div class="container mx-auto">
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div class="d-flex d-lg-none d-block align-items-center">
+                        <button class="btn open-btn px-1 py-0 text-dark fs-2"><i class='bx bx-menu-alt-left'></i></button>
+                        @*<a href="#" class="text-decoration-none ms-3">
+            <img src="/logo/logo.png" width="50rem" />
+        </a>*@
+                        
+                    </div>
+                    <h5>
+                        @ViewData["Title"]
+                    </h5>
+                    <div class="text-end">
+                        <div class="account card rounded-4 d-flex flex-row gap-4 justify-content-between align-items-center px-4 py-2" id="account-info">
+                            <div>
+                                <span class="d-block" style="color: grey">@UserManager.GetUserName(User)</span>
+
+                                <span class="d-block" style="color: lightgrey; font-size: 0.8rem">
+                                    @foreach (var role in await UserManager.GetRolesAsync(await UserManager.GetUserAsync(User)))
+                                    {
+                                        @role
+                                    }
+                                </span>
+                            </div>
+                            @if ((await UserManager.GetUserAsync(User)).ImageId != null)
+                            {
+                                <img id="post-image" class="profile-picture mx-auto" src="data:image/jpeg;base64,@Convert.ToBase64String((await ImageService.GetImageByIdAsync((await UserManager.GetUserAsync(User)).ImageId.Value)).Data)" alt="Resim">
+
+                            }
+                            else
+                            {
+                                <img class="profile-picture" src="/img/profile.png" />
+                            }
+
+
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <div class="dropdown-menu mt-1 shadow-5 border-1" id="dropdown-menu">
+                                <ul class="list-unstyled p-2">
+                                    <li class="">
+                                        <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-username="@UserManager.GetUserName(User)" class="text-decoration-none px-2 py-2 d-block">
+                                            <i class='menu-icon bx bxs-user-circle'></i>
+                                            <span class="">Profil</span>
+                                        </a>
+                                    </li>
+                                    <hr />
+                                    <li class="">
+                                        <a asp-area="" asp-controller="Auth" asp-action="Logout" class="text-decoration-none px-2 py-2 d-block">
+                                            <i class='menu-icon bx bx-log-out'></i>
+                                            <span class="">Çıkış Yap</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <hr />
+                @RenderBody()
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+    <script>var accountInfo = document.getElementById("account-info");
+        var dropdownMenu = document.getElementById("dropdown-menu");
+
+        accountInfo.addEventListener("click", function (event) {
+            if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
+                dropdownMenu.style.display = "block";
+            } else {
+                dropdownMenu.style.display = "none";
+            }
+
+            event.stopPropagation();
+        });
+
+        document.addEventListener("click", function () {
+            dropdownMenu.style.display = "none";
+        });
+
+        //$(document).ready(function () {
+        //    var url = window.location.pathname;
+        //    var controller = url.split("/")[2];
+
+        //    console.log(controller);
+        //    switch (controller) {
+        //        case undefined:
+        //        case "Home":
+        //            $("#dashboard-link").addClass("active");
+        //            break;
+        //        case "Post":
+        //            $("#posts-link").addClass("active");
+        //            break;
+        //        case "Category":
+        //            $("#category-link").addClass("active");
+        //            break;
+        //        case "Comment":
+        //            $("#comment-link").addClass("active");
+        //            break;
+        //        case "Contact":
+        //            $("#contact-link").addClass("active");
+        //            break;
+        //        case "User":
+        //            $("#user-link").addClass("active");
+        //            break;
+        //        case "Role":
+        //            $("#role-link").addClass("active");
+        //            break;
+        //        case "Profile":
+        //            $("#profile-link").addClass("active");
+        //            break;
+        //        default:
+        //            $(".active").removeClass("active");
+        //            break;
+        //    }
+        //});
+
+        $('.open-btn').on('click', function () {
+            $('.sidebar').addClass('active');
+        });
+
+        $('.close-btn').on('click', function () {
+            $('.sidebar').removeClass('active');
+        });
+     
+    </script>
+  
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+﻿@model CategoryDto
+
+@{
+    ViewData["Title"] = "Yeni Kategori";
+}
+
+
+
+<div class="card rounded-5 p-4 mt-4 col-lg-5 col-12">
+
+    <form asp-controller="Category" asp-action="Add" method="post" enctype="multipart/form-data">
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Kategori Adı</label>
+            <input asp-for="Name" type="text" class="form-control" id="title">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="d-flex gap-3 align-items-center mt-4">
+            <div class="form-check">
+                <input asp-for="IsActive" type="checkbox" class="form-check-input" id="active">
+                <label class="form-check-label" for="active">Aktif</label>
+            </div>
+            <button type="submit" class="btn btn-success">Kaydet</button>
+        </div>
+
+    </form>
+
+</div>

@@ -1,0 +1,27 @@
+﻿@model Comment
+
+
+    <div class="container col-12 col-lg-8 mt-3">
+        <form asp-controller="Comment" asp-action="Send" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="PostId" type="hidden" />
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <div class="mb-3">
+                    <label for="name" class="form-label">Adınız</label>
+                    <input asp-for="Name" type="name" class="form-control" id="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">E-posta adresiniz</label>
+                    <input asp-for="Email" type="email" class="form-control" id="email" required>
+                </div>
+            }
+
+            <div class="mb-3">
+                <label for="comment" class="form-label">Yorumunuz</label>
+                <textarea asp-for="Content" class="form-control" id="comment" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-sm btn-success">Gönder</button>
+        </form>
+       
+    </div>

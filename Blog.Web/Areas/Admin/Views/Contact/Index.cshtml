@@ -1,0 +1,47 @@
+﻿@model List<Contact>
+
+@{
+    ViewData["Title"] = "Mesajlar";
+}
+
+
+<div class="card w-100 p-3 rounded-5 mt-4 table-responsive">
+    <table class="w-100 post-table">
+        <thead>
+            <tr>
+                <th class="py-3" scope="col"></th>
+                <th class="py-3" scope="col">Adı</th>
+                <th class="py-3" scope="col">E-posta</th>
+                <th class="py-3" scope="col">Tarih</th>
+                <th class="py-3" scope="col">Mesaj</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr class="post-row border-top">
+                    <th class="py-3" scope="row">
+                        @(i + 1)
+                    </th>
+
+                    <td class="py-3">
+                        @Model[i].Name
+                    </td>
+                    <td class="py-3">
+                        <a href="mailto @Model[i].Email">@Model[i].Email</a>
+                    </td>
+                    <td class="py-3">
+                        @Model[i].CreatedTime.ToString("dd.MM.yyyy")
+
+                    </td>
+                    <td class="py-3">
+                        @Model[i].Message
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+

@@ -1,50 +1,218 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Blog.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <title>@ViewData["Title"] - Ali Sayar</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Blog.Web.styles.css" asp-append-version="true" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/a781bd13a7.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Blog.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+        <div class="border-bottom bg-white box-shadow mb-3">
+            <div class="container">
+                <div class="d-flex justify-content-center p-3">
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="text-decoration-none d-flex align-items-center">
+                        <img src="/logo/logo.png" width="50rem" class="" />
+                        <div class="ms-2 text-dark">
+                            <div>
+                                <div>Ali Sayar</div>
+                                <div style="font-size: 0.7rem">Software Developer</div>
+                            </div>
+
+                        </div>
+                    </a>
                 </div>
+                <hr class="m-0" />
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <div class="container-fluid">
+                        <button class="navbar-toggler"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#navbarNavDropdown"
+                                aria-controls="navbarNavDropdown"
+                                aria-expanded="false"
+                                aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")" aria-current="page">Anasayfa</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle @(ViewContext.RouteData.Values["controller"].ToString() == "Category" ? "active" : "")"
+                                       role="button"
+                                       data-bs-toggle="dropdown"
+                                       aria-expanded="false">
+                                        Kategoriler
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        @await Component.InvokeAsync("NavbarCategories")
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="Home" asp-action="AboutMe" class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "AboutMe" ? "active" : "")">Hakkımda</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="Home" asp-action="ContactMe" class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "ContactMe" ? "active" : "")">Bana Ulaşın</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="px-3">
+                            <a class="text-secondary" style="cursor: pointer" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </a>
+                            <div id="PopoverContent" class="d-none">
+                                <form asp-area="" asp-controller="Search" asp-action="Index" method="get">
+                                    <div class="input-group">
+                                        <input type="text" name="s" class="form-control" placeholder="Arama yap">
+                                        <button class="btn btn-outline-secondary" type="submit">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+                        {
+                            <div class="navbar-brand">
+                                <div class="account card box-shadow rounded-4 d-flex flex-row gap-4 justify-content-between align-items-center px-3 py-1" id="account-info">
+                                    <div>
+                                        <span class="d-block" style="color: grey; font-size: 0.9rem">@UserManager.GetUserName(User)</span>
+
+                                        <span class="d-block" style="color: lightgrey; font-size: 0.7rem">
+                                            @foreach (var role in await UserManager.GetRolesAsync(await UserManager.GetUserAsync(User)))
+                                            {
+                                                @role
+                                            }
+                                        </span>
+                                    </div>
+                                    @if ((await UserManager.GetUserAsync(User)).ImageId != null)
+                                    {
+                                        <img id="post-image" class="profile-picture mx-auto" src="data:image/jpeg;base64,@Convert.ToBase64String((await ImageService.GetImageByIdAsync((await UserManager.GetUserAsync(User)).ImageId.Value)).Data)" alt="Resim">
+
+                                    }
+                                    else
+                                    {
+                                        <img class="profile-picture" src="/img/profile.png" />
+                                    }
+
+
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <div class="dropdown-menu mt-1 shadow-5 border-1" id="dropdown-menu" style="z-index: 999">
+                                        <ul class="list-unstyled px-2" style="z-index: 999">
+                                            @if (User.IsInRole("Admin") || User.IsInRole("Yazar"))
+                                            {
+                                                <li class="my-1">
+                                                    <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="text-decoration-none px-2 py-2 d-block">
+                                                        <i class="fa-solid fa-user-tie"></i>
+                                                        <span class="">Admin Paneli</span>
+                                                    </a>
+                                                </li>
+                                            }
+
+                                            <li class="my-1">
+                                                <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-username="@UserManager.GetUserName(User)" class="text-decoration-none px-2 py-2 d-block">
+                                                    <i class='menu-icon bx bxs-user-circle'></i>
+                                                    <span class="">Profil</span>
+                                                </a>
+                                            </li>
+                                            <hr />
+                                            <li class="">
+                                                <a asp-area="" asp-controller="Auth" asp-action="Logout" class="text-decoration-none px-2 py-2 d-block">
+                                                    <i class='menu-icon bx bx-log-out'></i>
+                                                    <span class="">Çıkış Yap</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <a asp-area="" asp-controller="Auth" asp-action="Login" class="login text-decoration-none px-2 py-2 d-block align-items-center d-flex gap-2">
+                                <i class='menu-icon bx bx-log-in'></i>
+                                <span class="">Giriş Yap</span>
+                            </a>
+                        }
+
+                    </div>
+                </nav>
+
+
+
             </div>
-        </nav>
+        </div>
+
+
     </header>
-    <div class="container">
+    <div class="container" style="min-height:35rem">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - Blog.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-top footer text-muted bg-white" style="font-size: 0.9rem">
+        <div class="container pt-5">
+            <div class="text-center">
+                "Bilgisayar mühendisi olacağımıza, işletim sistemi olsaydık daha az çökerdik."
+            </div>
+            <div class="text-center mt-5 pb-3">
+                <div>
+                    &copy; 2024 - Ali Sayar
+                </div>
+                <a asp-area="" asp-controller="Home" asp-action="Privacy" style="font-size:0.8rem">Gizlilik Politikası</a>
+            </div>
+
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        const popover = new bootstrap.Popover(document.querySelector('[data-bs-toggle="popover"]'), {
+            container: 'body',
+            html: true,
+            placement: 'bottom',
+            sanitize: false,
+            content() {
+                return document.querySelector('#PopoverContent').innerHTML;
+            }
+        });
+        var accountInfo = document.getElementById("account-info");
+        var dropdownMenu = document.getElementById("dropdown-menu");
+
+        accountInfo.addEventListener("click", function (event) {
+            if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
+                dropdownMenu.style.display = "block";
+            } else {
+                dropdownMenu.style.display = "none";
+            }
+            event.stopPropagation();
+        });
+        document.addEventListener("click", function () {
+            dropdownMenu.style.display = "none";
+        });
+      </script>
     @await RenderSectionAsync("Scripts", required: false)
+
+
 </body>
 </html>
 

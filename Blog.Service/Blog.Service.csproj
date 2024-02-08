@@ -6,4 +6,35 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Services\" />
+    <None Remove="Services\Abstracts\" />
+    <None Remove="Services\Concretes\" />
+    <None Remove="Extensions\" />
+    <None Remove="AutoMapper\" />
+    <None Remove="AutoMapper\Posts\" />
+    <None Remove="AutoMapper\Categories\" />
+    <None Remove="AutoMapper\User\" />
+    <None Remove="AutoMapper\Abouts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="Services\Abstracts\" />
+    <Folder Include="Services\Concretes\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="AutoMapper\" />
+    <Folder Include="AutoMapper\Posts\" />
+    <Folder Include="AutoMapper\Categories\" />
+    <Folder Include="AutoMapper\User\" />
+    <Folder Include="AutoMapper\Abouts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Blog.Entity\Blog.Entity.csproj" />
+    <ProjectReference Include="..\Blog.DataAccess\Blog.DataAccess.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+  </ItemGroup>
 </Project>

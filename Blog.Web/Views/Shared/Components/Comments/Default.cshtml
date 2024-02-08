@@ -1,0 +1,39 @@
+﻿@model List<Comment>
+
+<div class="container col-12 col-lg-8 mt-4">
+    <h5>Yorumlar</h5>
+    @foreach (var item in Model)
+    {
+        <div class="card p-3 my-2">
+
+            @if (item.UserId != null)
+            {
+                <a asp-controller="Profile" asp-action="Index" asp-route-username="@item.User.UserName" class="text-decoration-none text-secondary">
+                    <div class="d-flex gap-2 align-items-center">
+                        <img id="profile-img" class="img-fluid rounded-circle"
+                             src="@(item.User.Image?.Data != null ? $"data:image/jpeg;base64,{Convert.ToBase64String(@item.User.Image.Data)}" : "/img/profile.png")"
+                             alt="Resim" style="width: 35px; height: 35px; object-fit: cover">
+                        <div>
+                            <div style="font-size: 0.8rem">@item.User.FirstName @item.User.LastName</div>
+                            <div style="font-size: 0.8rem">@item.CreatedTime</div>
+                        </div>
+                    </div>
+                </a>
+
+            }
+            else
+            {
+                <div class="d-flex gap-2 align-items-center">
+                    <img id="profile-img" class="img-fluid rounded-circle"
+                         src="/img/profile.png" )"
+                         alt="Resim" style="width: 35px; height: 35px; object-fit: cover">
+                    <div>
+                        <div style="font-size: 0.8rem">@item.Name <span class="fw-light fst-italic">Misafir</span></div>
+                        <div style="font-size: 0.8rem">@item.CreatedTime</div>
+                    </div>
+                </div>
+            }
+            <p class="mt-2">@item.Content</p>
+        </div>
+    }
+</div>

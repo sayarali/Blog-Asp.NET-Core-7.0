@@ -1,26 +1,155 @@
 ﻿@model ErrorViewModel
 @{
-    ViewData["Title"] = "Error";
+    Layout = null;
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bir Hata Oluştu!</title>
+    <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/a781bd13a7.js" crossorigin="anonymous"></script>
+    <style>
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+        @@import url('https://fonts.googleapis.com/css?family=Comfortaa');
 
-@if (Model.ShowRequestId)
-{
-    <p>
-        <strong>Request ID:</strong> <code>@Model.RequestId</code>
-    </p>
-}
+        * {
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
 
-<h3>Development Mode</h3>
-<p>
-    Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
-</p>
-<p>
-    <strong>The Development environment shouldn't be enabled for deployed applications.</strong>
-    It can result in displaying sensitive information from exceptions to end users.
-    For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
-    and restarting the app.
-</p>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
 
+        body {
+            background-color: #E48400;
+            font-family: sans-serif;
+        }
+
+        .container {
+            z-index: 1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            text-align: center;
+            padding: 10px;
+            min-width: 300px;
+            div
+
+        {
+            display: inline-block;
+        }
+
+        .lock {
+            opacity: 1;
+        }
+
+        h1 {
+            font-family: 'Comfortaa', cursive;
+            font-size: 100px;
+            text-align: center;
+            color: #eee;
+            font-weight: 100;
+            margin: 0;
+        }
+
+        p {
+            color: #fff;
+        }
+
+        }
+
+        .lock {
+            transition: 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            &.generated
+
+        {
+            transform: scale(0.5);
+            position: absolute;
+            animation: 2s move linear;
+            animation-fill-mode: forwards;
+        }
+
+        ::after {
+            content: '';
+            background: #F76B1C;
+            opacity: 0.3;
+            display: block;
+            position: absolute;
+            height: 100%;
+            width: 50%;
+            top: 0;
+            left: 0;
+        }
+
+        .bottom {
+           
+            display: block;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .top {
+            height: 60px;
+            width: 50px;
+            border-radius: 50%;
+            border: 10px solid #fff;
+            display: block;
+            position: relative;
+            top: 30px;
+            margin: 0 auto;
+            &::after
+
+        {
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        }
+        }
+
+        @@keyframes move {
+            to {
+                top: 100%;
+            }
+        }
+
+        @@media (max-width: 420px) {
+            .container {
+                transform: translate(-50%,-50%) scale(0.8)
+            }
+
+            .lock.generated {
+                transform: scale(0.3);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            4<div class="lock">
+                <div class="top"></div><div class="bottom"></div>
+            </div>4
+        </h1>
+        <p class="fs-5">Sayfa Bulunamadı!</p>
+        <p class="fs-6 opacity-75">Bir hata olduğunu düşünüyorsanız, site yöneticisiyle iletişime geçiniz.</p>
+        <a href="/" class="btn btn-sm"><i class="fa-regular fa-hand-point-right"></i> Anasayfa</a>
+    </div>
+
+    
+</body>
+</html>

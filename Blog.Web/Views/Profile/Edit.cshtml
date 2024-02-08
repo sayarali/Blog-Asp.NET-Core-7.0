@@ -1,0 +1,108 @@
+﻿@model UserProfileDto
+@{
+    ViewData["Title"] = "Profili Düzenle";
+}
+
+<div class="container my-5 col-xl-7">
+    <div class="card shadow rounded-5 p-4">
+        <h3 class="text-center mb-4">Profil Düzenle</h3>
+        <div class="text-center mb-3">
+
+
+            @if (@Model.Image.Data != null && Model.ImageFile == null)
+            {
+                <img id="profile-img" class="mx-auto img-fluid rounded-circle" src="data:image/jpeg;base64,@Convert.ToBase64String(@Model.Image?.Data)" style="display: block; width: 150px; height: 150px; object-fit: cover">
+            }
+            <img class="mx-auto img-fluid rounded-circle" id="image-preview" src="#" style="display:none; width: 150px; height: 150px; object-fit: cover">
+
+
+        </div>
+        <form asp-controller="Profile" asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="d-flex justify-content-center gap-2">
+                <div class="mb-3 w-100">
+                    <label for="FirstName" class="form-label">Ad</label>
+                    <input type="text" class="form-control" id="FirstName" name="FirstName" value="@Model.FirstName">
+                </div>
+                <div class="mb-3 w-100">
+                    <label for="LastName" class="form-label">Soyad</label>
+                    <input type="text" class="form-control" id="LastName" name="LastName" value="@Model.LastName">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="PhoneNumber" class="form-label">Telefon</label>
+                <input type="tel" class="form-control" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber">
+            </div>
+            <div class="mb-3">
+                <label for="UserName" class="form-label">Kullanıcı Adı</label>
+                <input type="text" class="form-control" id="UserName" name="UserName" value="@Model.UserName">
+            </div>
+            <div class="mb-3">
+                <label for="Email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email">
+            </div>
+            <div class="mb-3">
+                <label for="Image" class="form-label">Profil Resmi</label>
+                <div class="d-flex gap-3 align-items-center justify-content-between">
+                    <input asp-for="ImageFile" type="file" class="form-control" id="image" name="ImageFile">
+                    <a id="kaldirbtn" class="btn btn-sm btn-danger" style="display: none" onclick="removeImage()">Kaldır</a>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="d-flex gap-3 justify-content-between align-items-center">
+                    <button class="btn btn-sm save-btn d-grid w-100" type="submit">Kaydet</button>
+                    <a asp-controller="Profile" asp-action="ChangePassword" class="w-100 btn btn-sm save-btn">
+                        Parolayı Değiştir
+                    </a>
+                </div>
+               
+            </div>
+        </form>
+
+      
+
+    </div>
+</div>
+
+
+<script>document.getElementById('image').addEventListener('change', function () {
+        var fileInput = this;
+        var previewImage = document.getElementById('image-preview');
+        var profileImg = document.getElementById('profile-img');
+        var btn = document.getElementById('kaldirbtn');
+
+        if (fileInput.files.length === 0 || !window.FileReader) {
+            return;
+        }
+
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            previewImage.src = e.target.result;
+            if (profileImg != null) {
+                profileImg.style.display = 'none';
+            }
+
+            previewImage.style.display = 'block';
+            btn.style.display = 'block';
+
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+    });
+    function removeImage() {
+        var fileInput = document.getElementById('image');
+        var previewImage = document.getElementById('image-preview');
+        var profileImg = document.getElementById('profile-img');
+        var btn = document.getElementById('kaldirbtn');
+        btn.style.display = 'none';
+        previewImage.style.display = 'none';
+        if (profileImg != null) {
+            profileImg.style.display = 'block';
+        }
+
+        fileInput.value = '';
+
+        previewImage.src = '#';
+    };</script>

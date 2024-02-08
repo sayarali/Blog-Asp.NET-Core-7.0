@@ -1,0 +1,62 @@
+﻿@model List<CategoryDto>
+
+@{
+    ViewData["Title"] = "Kategoriler";
+}
+
+<div class="d-flex justify-content-between">
+    <a asp-area="Admin" asp-controller="Category" asp-action="Add" class="btn btn-success d-flex align-items-center" role="button">
+        <i class='bx bx-plus'></i>
+        <span class="ms-2">Kategori Ekle</span>
+    </a>
+</div>
+
+<div class="d-flex flex-wrap gap-3 mt-4">
+
+    @foreach (var item in Model)
+    {
+        <div class="border @(item.IsActive ? "bg-success-subtle" : "bg-danger-subtle") shadow rounded-5 card p-4">
+            <h4 class="text-center p-0">@item.Name</h4>
+            <hr />
+            <div style="max-width: 7rem" class="mx-auto">
+                <a class="btn btn-primary btn-sm d-block"
+                   data-id="@item.Id"
+                   asp-area="Admin" asp-controller="Category" asp-action="Update" asp-route-id="@item.Id">
+                    <i class='bx bxs-edit'></i> Düzenle
+                </a>
+                <a class="btn btn-danger btn-sm d-block mt-1"
+                   data-bs-toggle="modal"
+                   data-bs-target="#confirmDeleteModal-@item.Id">
+                    <i class='bx bxs-eraser'></i> Sil
+                </a>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="confirmDeleteModal-@item.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Kategoriyi Sil</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Bir kategoriyi silerseniz, o kategorideki tüm makalelerde silinir. Bunu yapmak istediğinize emin misiniz?
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-primary btn-sm"
+                               data-bs-dismiss="modal">
+                                <i class="fa-solid fa-xmark"></i> İptal
+                            </a>
+                            <a class="btn btn-danger btn-sm"
+                               data-id="@item.Id"
+                               asp-area="Admin" asp-controller="Category" asp-action="Delete" asp-route-categoryId="@item.Id">
+                                <i class='bx bxs-eraser'></i> Evet
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+</div>
